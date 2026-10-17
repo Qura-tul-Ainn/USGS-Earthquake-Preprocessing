@@ -9,8 +9,19 @@ SEED = 42
 TARGET = "big_quake"
 
 # TODO (Task 4 and 5): fill these in after you have explored the data.
-NUMERIC: list[str] = []   # numeric feature columns
-NOMINAL: list[str] = []   # categorical feature columns (one-hot encoded)
+NUMERIC: list[str] = [
+    "hour",
+    "dayofweek",
+    "update_lag_hours",
+    "is_reviewed",
+    "nst_missing",
+    "abs_lat",
+    "is_shallow",
+]   # numeric feature columns
+NOMINAL: list[str] = [
+    "type",
+    "region",
+]   # categorical feature columns (one-hot encoded)
 LEAKY: list[str] = [
     "title",
     "sig",
