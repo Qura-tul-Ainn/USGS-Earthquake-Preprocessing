@@ -1,3 +1,4 @@
+
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -8,18 +9,24 @@ PROCESSED_DIR = ROOT / "data" / "processed"
 SEED = 42
 TARGET = "big_quake"
 
-# TODO (Task 4 and 5): fill these in after you have explored the data.
+# Numeric feature columns
 NUMERIC: list[str] = [
-"hour",
+    "hour",
     "dayofweek",
     "update_lag_hours",
     "is_reviewed",
     "nst_missing",
     "abs_lat",
-    "is_shallow",]   # numeric feature columns
+    "is_shallow",
+]
+
+# Categorical feature columns (one-hot encoded)
 NOMINAL: list[str] = [
- "type",
-    "region",]   # categorical feature columns (one-hot encoded)
+    "type",
+    "region",
+]
+
+# Columns that encode the magnitude: must be dropped
 LEAKY: list[str] = [
     "title",
     "sig",
@@ -27,4 +34,4 @@ LEAKY: list[str] = [
     "cdi",
     "felt",
     "alert",
-]     # columns that encode the magnitude: must be dropped
+]
