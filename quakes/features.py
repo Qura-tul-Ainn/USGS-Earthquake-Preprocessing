@@ -66,9 +66,8 @@ def add_quality_features(df: pd.DataFrame) -> pd.DataFrame:
     return out
 
 
-
 def add_location_features(df: pd.DataFrame) -> pd.DataFrame:
-    """Add 'abs_lat' and 'is_shallow' (1 if depth_km < 70 else 0)."""
+    """Add location-related features."""
     out = df.copy()
 
     if "lat" in out.columns:
@@ -79,6 +78,13 @@ def add_location_features(df: pd.DataFrame) -> pd.DataFrame:
     if "depth_km" in out.columns:
         depth = pd.to_numeric(out["depth_km"], errors="coerce")
         out["is_shallow"] = depth.lt(70).fillna(False).astype(int)
+
+    # Create a categorical region from the USGS place description.
+    if "place" in out.columns:
+        place = out["place"].astype("string")
+        out["region"] = place.str.split(" of ", n=1).str[-1].str.strip()
+        out["region"] = out["region"].fillna("Unknown")
+        out.loc[out["region"] == "", "region"] = "Unknown"
 
     return out
 

@@ -1,5 +1,6 @@
 
-"""Task 5: split and preprocess."""
+"""Split data and build preprocessing pipelines."""
+
 import pandas as pd
 from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
@@ -8,6 +9,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import (
     MinMaxScaler,
     OneHotEncoder,
+    PolynomialFeatures,
     RobustScaler,
     StandardScaler,
 )
@@ -17,11 +19,15 @@ from . import config
 
 def split_data(df: pd.DataFrame, test_size: float = 0.2):
     """Return X_train, X_test, y_train, y_test."""
+
     if config.TARGET not in df.columns:
         raise KeyError(f"Target column '{config.TARGET}' is missing")
 
     y = df[config.TARGET]
-    X = df.drop(columns=[config.TARGET, "mag"], errors="ignore")
+    X = df.drop(
+        columns=[config.TARGET, "mag"],
+        errors="ignore",
+    )
 
     X_train, X_test, y_train, y_test = train_test_split(
         X,
@@ -34,9 +40,15 @@ def split_data(df: pd.DataFrame, test_size: float = 0.2):
     return X_train, X_test, y_train, y_test
 
 
-def build_preprocessor(scaler: str = "robust") -> ColumnTransformer:
-    """Build preprocessing pipelines for numeric and nominal features."""
-   
+def build_preprocessor(
+    scaler: str = "robust",
+    degree: int = 1,
+) -> ColumnTransformer:
+    """Build numeric and categorical preprocessing pipelines."""
+
+    if degree < 1:
+        raise ValueError("degree must be at least 1")
+
     scalers = {
         "standard": StandardScaler(),
         "minmax": MinMaxScaler(),
@@ -48,12 +60,24 @@ def build_preprocessor(scaler: str = "robust") -> ColumnTransformer:
             "Unknown scaler. Choose 'standard', 'minmax', or 'robust'."
         )
 
-    numeric_pipeline = Pipeline(
-        steps=[
-            ("imputer", SimpleImputer(strategy="median")),
-            ("scaler", scalers[scaler]),
-        ]
-    )
+    numeric_steps = [
+        ("imputer", SimpleImputer(strategy="median")),
+    ]
+
+    if degree > 1:
+        numeric_steps.append(
+            (
+                "polynomial",
+                PolynomialFeatures(
+                    degree=degree,
+                    include_bias=False,
+                ),
+            )
+        )
+
+    numeric_steps.append(("scaler", scalers[scaler]))
+
+    numeric_pipeline = Pipeline(steps=numeric_steps)
 
     nominal_pipeline = Pipeline(
         steps=[
@@ -69,4 +93,3 @@ def build_preprocessor(scaler: str = "robust") -> ColumnTransformer:
         ],
         remainder="drop",
     )
-#abc

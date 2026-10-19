@@ -3,3 +3,13 @@ __pycache__/
 .pytest_cache/
 .env
 .venv/
+# Jupyter temporary files
+.ipynb_checkpoints/
+**/.ipynb_checkpoints/
+
+# Local generated data
+data/processed/*.db
+logs/
+
+# Generated model artifacts
+models/*.joblib
