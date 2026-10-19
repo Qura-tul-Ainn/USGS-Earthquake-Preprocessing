@@ -1,0 +1,23 @@
+{
+  "task": "regression",
+  "model": "linear",
+  "train_rows": 1418,
+  "test_rows": 355,
+  "baseline_test": {
+    "mae": 0.9067642419798319,
+    "rmse": 1.2816306106477229,
+    "r2": -0.006360706012190409
+  },
+  "cross_validation_train": {
+    "mae": -0.7209768310787059,
+    "rmse": -0.9427143949843941,
+    "r2": 0.40153217054200036
+  },
+  "model_test": {
+    "mae": 0.7308732394366196,
+    "rmse": 0.9710716637078531,
+    "r2": 0.4222625892514613
+  },
+  "threshold": null,
+  "model_path": "D:\\USGS_Assignment (1)\\day1-quake-preprocessing\\models\\regression_linear.joblib"
+}
