@@ -42,12 +42,13 @@ def keep_earthquakes(df: pd.DataFrame) -> pd.DataFrame:
         .str.lower()
         .eq("earthquake")
     )
+    """keep_earthquakes() function filters the DataFrame to keep only earthquake records, ignoring uppercase letters, lowercase letters, and extra spaces"""
 
-    return df.loc[mask].copy()
+    return df.loc[mask].copy() # returns only the rows where the mask is True
 
 
 def extract_region(series: pd.Series) -> pd.Series:
-    """Extract the final comma-separated region from a place description."""
+    """Extract the final comma-separated region from a place description.10 km NE of Lahore, Pakistan" → "Pakistan"""
     def get_region(value):
         if pd.isna(value):
             return value
