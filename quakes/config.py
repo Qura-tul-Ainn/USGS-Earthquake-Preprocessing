@@ -10,6 +10,7 @@ SEED = 42
 TARGET = "big_quake"
 
 # Numeric feature columns
+
 NUMERIC: list[str] = [
     "hour",
     "dayofweek",
@@ -18,6 +19,9 @@ NUMERIC: list[str] = [
     "nst_missing",
     "abs_lat",
     "is_shallow",
+    "lat",
+    "lon",
+    "depth_km",
 ]
 
 # Categorical feature columns (one-hot encoded)

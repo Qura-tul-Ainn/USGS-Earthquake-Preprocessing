@@ -10,18 +10,18 @@
     "roc_auc": 0.5
   },
   "cross_validation_train": {
-    "accuracy": 0.9506320609167371,
-    "precision": 0.6844444444444445,
-    "recall": 0.39869281045751637,
-    "roc_auc": 0.9205661211853162
+    "accuracy": 0.9548574130294132,
+    "precision": 0.7283333333333333,
+    "recall": 0.46535947712418296,
+    "roc_auc": 0.9661383851786327
   },
   "model_test": {
-    "accuracy": 0.952112676056338,
-    "recall": 0.6818181818181818,
-    "precision": 0.6,
-    "roc_auc": 0.9489489489489489,
-    "threshold": 0.3302377648371612
+    "accuracy": 0.9352112676056338,
+    "recall": 0.7272727272727273,
+    "precision": 0.48484848484848486,
+    "roc_auc": 0.9653289653289653,
+    "threshold": 0.22683236468071188
   },
-  "threshold": 0.3302377648371612,
+  "threshold": 0.22683236468071188,
   "model_path": "D:\\USGS_Assignment (1)\\day1-quake-preprocessing\\models\\classification_logistic.joblib"
 }
